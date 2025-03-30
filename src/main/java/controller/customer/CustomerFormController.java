@@ -1,4 +1,4 @@
-package controller;
+package controller.customer;
 
 import DB.DbConnection;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,11 +17,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddCustomerFormController implements Initializable {
+public class CustomerFormController implements Initializable {
 
     public TableColumn colTitle;
     public TableColumn colSalary;
@@ -49,6 +47,9 @@ public class AddCustomerFormController implements Initializable {
     @FXML
     private TableView<Customer> tableCustomer;
 
+
+     CustomerService customerService=new CustomerController();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -67,6 +68,7 @@ public class AddCustomerFormController implements Initializable {
         titleList.add("MISS");
         titleList.add("MRS");
         combName.setItems(titleList);
+
 
         tableCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
             if (newVal != null) {
@@ -92,7 +94,6 @@ public class AddCustomerFormController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-
         Customer customer = new Customer(
                 txtId.getText(),
                 combName.getValue(),
@@ -104,32 +105,15 @@ public class AddCustomerFormController implements Initializable {
                 txtProvince.getText(),
                 txtPCode.getText()
         );
+        boolean added=customerService.addCustomer(customer);
+        if (added){
+            new Alert(Alert.AlertType.CONFIRMATION,"Customer Added!");
+            clear();
+            loadTable();
+        }else{
+            new Alert(Alert.AlertType.ERROR);
 
-        try {
-            String SQL = "INSERT INTO Customer VALUES(?,?,?,?,?,?,?,?,?)";
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.setObject(1, customer.getId());
-            preparedStatement.setObject(2, customer.getTitle());
-            preparedStatement.setObject(3, customer.getName());
-            preparedStatement.setObject(4, customer.getDob());
-            preparedStatement.setObject(5, customer.getSalary());
-            preparedStatement.setObject(6, customer.getAddress());
-            preparedStatement.setObject(7, customer.getCity());
-            preparedStatement.setObject(8, customer.getProvince());
-            preparedStatement.setObject(9, customer.getPostalCode());
-
-            int i = preparedStatement.executeUpdate();
-            if (i > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer Added").show();
-                loadTable();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-
-        clear();
     }
 
     public void clear() {
@@ -178,18 +162,14 @@ public class AddCustomerFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        try {
-            String SQL = "DELETE FROM CUSTOMER  WHERE CustID='" + txtId.getText() + "' ";
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            int i = preparedStatement.executeUpdate();
-            if (i > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer Delete successfully").show();
-                loadTable();
-            }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        boolean delete=customerService.deleteCustomer(txtId.getText());
+        if(delete){
+            new Alert(Alert.AlertType.CONFIRMATION,"Customer Delete!");
+
+        }else{
+            new Alert(Alert.AlertType.ERROR);
+
         }
     }
 
@@ -212,32 +192,13 @@ public class AddCustomerFormController implements Initializable {
                 txtProvince.getText(),
                 txtPCode.getText()
         );
-
-        String SQL = "UPDATE  Customer SET CustTitle=? , CustName=? , DOB=? , salary=? , CustAddress=? ,  City=? , Province=? , PostalCode=? WHERE CustID=?";
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
-            preparedStatement.setObject(1, customer.getTitle());
-            preparedStatement.setObject(2, customer.getName());
-            preparedStatement.setObject(3, customer.getDob());
-            preparedStatement.setObject(4, customer.getSalary());
-            preparedStatement.setObject(5, customer.getAddress());
-            preparedStatement.setObject(6, customer.getCity());
-            preparedStatement.setObject(7, customer.getProvince());
-            preparedStatement.setObject(8, customer.getPostalCode());
-            preparedStatement.setObject(9, customer.getId());
-
-            boolean isUpdate = preparedStatement.executeUpdate() > 0;
-            if (isUpdate) {
-                new Alert(Alert.AlertType.INFORMATION, "Customer Updated!").show();
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        boolean update=customerService.updateCustomer(customer);
+        if(update){
+            new Alert(Alert.AlertType.CONFIRMATION,"Customer Updated!");
+            loadTable();
+        }else {
+            new Alert(Alert.AlertType.ERROR);
         }
-loadTable();
     }
 
 

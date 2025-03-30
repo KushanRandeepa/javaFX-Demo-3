@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="607.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerFormController">
+<AnchorPane prefHeight="607.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customer.CustomerFormController">
    <children>
       <Polygon fill="#0984e3" layoutX="233.0" layoutY="110.0" points="-307.7049560546875, 22.583877563476562, 486.69500732421875, -110.0, -22.856491088867188, -121.52885437011719" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fill="#3498db" layoutX="52.0" layoutY="2.0" points="-119.70496368408203, -26.61611557006836, 60.29505920410156, 89.38388061523438, 159.49502563476562, -146.61611938476562" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
