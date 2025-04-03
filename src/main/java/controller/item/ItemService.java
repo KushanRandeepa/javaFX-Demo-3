@@ -8,7 +8,7 @@ public interface ItemService {
 
     boolean addItem(Item item);
     boolean updateItem(Item item);
-    Customer searchItem(String id);
+    Item searchItem(String id);
     boolean deleteItem(String id);
     ObservableList<Item> getAllItem();
 

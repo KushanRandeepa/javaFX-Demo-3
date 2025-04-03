@@ -9,7 +9,6 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="569.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.item.ItemFormController">
    <children>
       <Polygon fill="#0984e3" layoutX="243.0" layoutY="120.0" points="-307.7049560546875, 22.583877563476562, 490.695068359375, -121.52884674072266, -22.856491088867188, -121.52885437011719" stroke="BLACK" strokeType="INSIDE" />
@@ -27,11 +26,11 @@
       <JFXTextField fx:id="txtDescription" layoutX="239.0" layoutY="156.0" promptText="descrption" />
       <JFXTextField fx:id="txtUnitPrice" layoutX="46.0" layoutY="213.0" promptText="unit price" />
       <JFXTextField fx:id="txtQty" layoutX="239.0" layoutY="213.0" promptText="qty" />
-      <JFXButton layoutX="46.0" layoutY="285.0" onAction="#btnAddOnAction" text="ADD" />
-      <JFXButton layoutX="121.0" layoutY="285.0" onAction="#btnUpdateonAction" text="Update" />
-      <JFXButton layoutX="444.0" layoutY="285.0" onAction="#btnReloadOnAction" text="Reload" />
-      <JFXButton layoutX="263.0" layoutY="285.0" onAction="#btnSearchOnAction" text="Search" />
-      <JFXButton layoutX="195.0" layoutY="285.0" onAction="#btnDeleteOnAction" text="Delete" />
+      <JFXButton layoutX="46.0" layoutY="272.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="50.0" text="ADD" />
+      <JFXButton layoutX="123.0" layoutY="272.0" onAction="#btnUpdateOnAction" text="Update" />
+      <JFXButton layoutX="497.0" layoutY="272.0" onAction="#btnReloadOnAction" text="Reload" />
+      <JFXButton layoutX="291.0" layoutY="272.0" onAction="#btnSearchOnAction" text="Search" />
+      <JFXButton layoutX="208.0" layoutY="272.0" onAction="#btnDeleteOnAction" text="Delete" />
       <TableView fx:id="tableItem" layoutX="31.0" layoutY="321.0" prefHeight="200.0" prefWidth="686.0">
         <columns>
           <TableColumn fx:id="colItemCode" prefWidth="75.0" text="ItemCode" />
