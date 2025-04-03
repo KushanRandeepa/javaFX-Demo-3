@@ -91,6 +91,18 @@ public class CustomerFormController implements Initializable {
         txtProvince.setText(newVal.getProvince());
     }
 
+    public void clear() {
+        txtId.setText("");
+        txtName.setText("");
+        txtSalary.setText("");
+        txtAddress.setText("");
+
+    }
+
+    private void loadTable() {
+        tableCustomer.setItems(customerService.getAllCustomer());
+    }
+
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
@@ -116,53 +128,13 @@ public class CustomerFormController implements Initializable {
         }
     }
 
-    public void clear() {
-        txtId.setText("");
-        txtName.setText("");
-        txtSalary.setText("");
-        txtAddress.setText("");
-
-    }
-
-    private void loadTable() {
-        ObservableList<Customer> customerObList = FXCollections.observableArrayList();
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            System.out.println(connection);
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from customer");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Customer customer = new Customer(
-                        resultSet.getString("CustID"),
-                        resultSet.getString("CustTitle"),
-                        resultSet.getString("CustName"),
-                        resultSet.getDate("DOB").toLocalDate(),
-                        resultSet.getDouble("salary"),
-                        resultSet.getString("CustAddress"),
-                        resultSet.getString("City"),
-                        resultSet.getString("Province"),
-                        resultSet.getString("PostalCode")
-                );
-                customerObList.add(customer);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        tableCustomer.setItems(customerObList);
-
-
-    }
-
     @FXML
     void btnReloadOnaction(ActionEvent event) {
         loadTable();
     }
 
-
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
         boolean delete=customerService.deleteCustomer(txtId.getText());
         if(delete){
             new Alert(Alert.AlertType.CONFIRMATION,"Customer Delete!");
@@ -175,8 +147,7 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
-
-
+        addValueToText(customerService.searchCustomer(txtId.getText()));
     }
 
     @FXML

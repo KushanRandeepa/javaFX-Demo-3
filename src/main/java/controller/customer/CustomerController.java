@@ -5,6 +5,7 @@ import dto.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,97 +16,95 @@ public class CustomerController implements CustomerService {
 
     @Override
     public boolean addCustomer(Customer customer) {
-        boolean isAdded;
+        String SQL = "INSERT INTO Customer VALUES(?,?,?,?,?,?,?,?,?)";
         try {
-            String SQL = "INSERT INTO Customer VALUES(?,?,?,?,?,?,?,?,?)";
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, customer.getId());
-            preparedStatement.setObject(2, customer.getTitle());
-            preparedStatement.setObject(3, customer.getName());
-            preparedStatement.setObject(4, customer.getDob());
-            preparedStatement.setObject(5, customer.getSalary());
-            preparedStatement.setObject(6, customer.getAddress());
-            preparedStatement.setObject(7, customer.getCity());
-            preparedStatement.setObject(8, customer.getProvince());
-            preparedStatement.setObject(9, customer.getPostalCode());
-            isAdded = preparedStatement.executeUpdate() > 0;
-
+            Object execute = CrudUtil.execute(SQL,
+                    customer.getId(),
+                    customer.getTitle(),
+                    customer.getName(),
+                    customer.getDob(),
+                    customer.getSalary(),
+                    customer.getAddress(),
+                    customer.getCity(),
+                    customer.getProvince(),
+                    customer.getPostalCode()
+            );
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (isAdded) {
-            return true;
-        }
-        return false;
-    }
 
+    }
 
     @Override
     public boolean updateCustomer(Customer customer) {
-        boolean isUpdated;
-
         String SQL = "UPDATE  Customer SET CustTitle=? , CustName=? , DOB=? , salary=? , CustAddress=? ,  City=? , Province=? , PostalCode=? WHERE CustID=?";
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, customer.getTitle());
-            preparedStatement.setObject(2, customer.getName());
-            preparedStatement.setObject(3, customer.getDob());
-            preparedStatement.setObject(4, customer.getSalary());
-            preparedStatement.setObject(5, customer.getAddress());
-            preparedStatement.setObject(6, customer.getCity());
-            preparedStatement.setObject(7, customer.getProvince());
-            preparedStatement.setObject(8, customer.getPostalCode());
-            preparedStatement.setObject(9, customer.getId());
-            isUpdated = preparedStatement.executeUpdate() > 0;
+            boolean execute = CrudUtil.execute(SQL,
+                    customer.getTitle(),
+                    customer.getName(),
+                    customer.getDob(),
+                    customer.getSalary(),
+                    customer.getAddress(),
+                    customer.getCity(),
+                    customer.getProvince(),
+                    customer.getPostalCode(),
+                    customer.getId()
+            );
+            return execute;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (isUpdated) {
-            return true;
-        }
-        return false;
     }
-
 
     @Override
     public boolean deleteCustomer(String id) {
-        boolean isDeleted;
-        try {
-            String SQL = "DELETE FROM CUSTOMER  WHERE CustID='" + id + "' ";
-            Connection connection = DbConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            isDeleted = preparedStatement.executeUpdate() > 0;
+        String SQL = "DELETE FROM CUSTOMER  WHERE CustID='" + id + "' ";
 
+        try {
+            Object execute = CrudUtil.execute(SQL);
+                return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if (isDeleted) {
-            return true;
-        }
-        return false;
-    }
 
+    }
 
     @Override
     public Customer searchCustomer(String id) {
+        String SQL="SELECT * FROM Customer WHERE CustID='" + id + "'";
+        try {
+            ResultSet resultSet = CrudUtil.execute(SQL);
+
+            while (resultSet.next()){
+                return new Customer(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDate(4).toLocalDate(),
+                        resultSet.getDouble(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getString(9)
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
-    ObservableList<Customer> customerObList = FXCollections.observableArrayList();
-
     @Override
     public ObservableList<Customer> getAllCustomer() {
+        ObservableList<Customer> customerObList = FXCollections.observableArrayList();
+        String SQL="SELECT * FROM Customer";
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            System.out.println(connection);
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from customer");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = CrudUtil.execute(SQL);
 
             while (resultSet.next()) {
-                Customer customer = new Customer(
+                customerObList.add(new Customer(
                         resultSet.getString("CustID"),
                         resultSet.getString("CustTitle"),
                         resultSet.getString("CustName"),
@@ -115,8 +114,8 @@ public class CustomerController implements CustomerService {
                         resultSet.getString("City"),
                         resultSet.getString("Province"),
                         resultSet.getString("PostalCode")
+                        )
                 );
-                customerObList.add(customer);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
