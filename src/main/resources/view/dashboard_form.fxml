@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormController">
+<AnchorPane prefHeight="400.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormController">
    <children>
-      <JFXButton layoutX="207.0" layoutY="67.0" onAction="#btnViewOnAction" prefHeight="78.0" prefWidth="134.0" style="-fx-background-color: blue;" text="Item" textFill="#fffefe" />
-      <JFXButton layoutX="207.0" layoutY="184.0" onAction="#btnAddCustomerOnAction" prefHeight="78.0" prefWidth="134.0" style="-fx-background-color: blue;" text="Add Customer" textFill="#fffefe" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe921" height="400.0" stroke="BLACK" strokeType="INSIDE" width="730.0" />
+      <JFXButton layoutX="274.0" layoutY="200.0" onAction="#btnViewOnAction" prefHeight="38.0" prefWidth="258.0" style="-fx-background-color: red;" text="Item" textFill="#fffefe" />
+      <JFXButton layoutX="274.0" layoutY="143.0" onAction="#btnAddCustomerOnAction" prefHeight="38.0" prefWidth="258.0" style="-fx-background-color: Green;" text="Customer" textFill="#fffefe" />
+      <JFXButton layoutX="274.0" layoutY="262.0" onAction="#btnOrderOnAction" prefHeight="38.0" prefWidth="258.0" style="-fx-background-color: purple;" text="Order" textFill="#fffefe" />
+      <Polygon fill="#0984e3" layoutX="243.0" layoutY="120.0" points="-304.50494384765625, 82.98388671875, 487.4949951171875, -120.00000762939453, -22.856491088867188, -121.52885437011719" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fill="#3498db" layoutX="73.0" layoutY="17.0" points="-119.70496368408203, -26.61611557006836, 52.695045471191406, 137.38389587402344, 159.49502563476562, -146.61611938476562" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Polygon fill="#192a56" layoutX="83.0" layoutY="40.0" points="-82.61705780029297, 134.58389282226562, 44.895050048828125, 26.583885192871094, -82.61705017089844, -83.32884216308594" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Polygon fill="#0528b5" layoutX="443.0" layoutY="32.0" points="287.0, 40.583885192871094, 287.0, -32.00000762939453, -197.30496215820312, 91.18388366699219" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Polygon fill="#0d3cfa" layoutX="177.0" layoutY="55.0" points="-49.704917907714844, 11.383895874023438, 147.89505004882812, -55.000003814697266, -21.704925537109375, -60.01612091064453" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="175.0" layoutY="14.0" prefHeight="70.0" prefWidth="405.0" text="Thogakade">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

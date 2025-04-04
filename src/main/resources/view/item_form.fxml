@@ -26,11 +26,14 @@
       <JFXTextField fx:id="txtDescription" layoutX="239.0" layoutY="156.0" promptText="descrption" />
       <JFXTextField fx:id="txtUnitPrice" layoutX="46.0" layoutY="213.0" promptText="unit price" />
       <JFXTextField fx:id="txtQty" layoutX="239.0" layoutY="213.0" promptText="qty" />
-      <JFXButton layoutX="46.0" layoutY="272.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="50.0" text="ADD" />
-      <JFXButton layoutX="123.0" layoutY="272.0" onAction="#btnUpdateOnAction" text="Update" />
-      <JFXButton layoutX="497.0" layoutY="272.0" onAction="#btnReloadOnAction" text="Reload" />
-      <JFXButton layoutX="291.0" layoutY="272.0" onAction="#btnSearchOnAction" text="Search" />
-      <JFXButton layoutX="208.0" layoutY="272.0" onAction="#btnDeleteOnAction" text="Delete" />
+      <JFXButton layoutX="446.0" layoutY="271.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: green;" text="ADD" textFill="#f7f2f2" />
+      <JFXButton layoutX="515.0" layoutY="272.0" onAction="#btnUpdateOnAction" style="-fx-background-color: blue;" text="Update" textFill="WHITE" />
+      <JFXButton layoutX="348.0" layoutY="529.0" onAction="#btnReloadOnAction" style="-fx-background-color: purple;" text="Reload" textFill="#ececec" />
+      <JFXButton layoutX="655.0" layoutY="272.0" onAction="#btnSearchOnAction" style="-fx-background-color: black;" text="Search" textFill="#f2f2f2">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="590.0" layoutY="272.0" onAction="#btnDeleteOnAction" style="-fx-background-color: red;" text="Delete" textFill="#fcfcfc" />
       <TableView fx:id="tableItem" layoutX="31.0" layoutY="321.0" prefHeight="200.0" prefWidth="686.0">
         <columns>
           <TableColumn fx:id="colItemCode" prefWidth="75.0" text="ItemCode" />
