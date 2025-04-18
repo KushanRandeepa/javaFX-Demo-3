@@ -11,8 +11,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerController implements CustomerService {
+
+    private  static CustomerController instance;
+
+    private CustomerController(){}
+
+    public static  CustomerController getInstance(){
+        return instance==null?instance=new CustomerController():instance;
+    }
 
     @Override
     public boolean addCustomer(Customer customer) {
@@ -122,4 +132,15 @@ public class CustomerController implements CustomerService {
         }
         return customerObList;
     }
+@Override
+    public List<String> getAllCustomerIds(){
+        ArrayList<String> custIdsList = new ArrayList<>();
+
+        ObservableList<Customer> allcustomer=getAllCustomer();
+        allcustomer.forEach(obj->{
+            custIdsList.add(obj.getId());
+    });
+    return custIdsList;
+    }
+
 }

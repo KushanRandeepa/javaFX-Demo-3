@@ -45,4 +45,13 @@ public class DashBoardFormController {
             throw new RuntimeException(e);
         }
     }
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/place_order_form.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

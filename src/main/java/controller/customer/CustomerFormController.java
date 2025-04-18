@@ -48,7 +48,7 @@ public class CustomerFormController implements Initializable {
     private TableView<Customer> tableCustomer;
 
 
-     CustomerService customerService=new CustomerController();
+     CustomerService customerService=CustomerController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
