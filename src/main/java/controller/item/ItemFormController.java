@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class ItemFormController implements Initializable {
 
-    ItemService itemService = new ItemController();
+    ItemService itemService = ItemController.getInstance();
 
 
     @FXML

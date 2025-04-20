@@ -4,6 +4,8 @@ import dto.Customer;
 import dto.Item;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public interface ItemService {
 
     boolean addItem(Item item);
@@ -11,6 +13,6 @@ public interface ItemService {
     Item searchItem(String id);
     boolean deleteItem(String id);
     ObservableList<Item> getAllItem();
-
+    List<String> itemIdslist();
 
 }

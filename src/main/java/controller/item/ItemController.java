@@ -11,8 +11,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemController implements ItemService{
+
+    private static ItemController instance;
+
+    private ItemController(){}
+
+    public static ItemController getInstance(){
+        return instance==null?instance = new ItemController():instance;
+    }
+
     @Override
     public boolean addItem(Item item) {
         String SQL="INSERT INTO Item VALUES(?,?,?,?,?)";
@@ -108,5 +119,15 @@ public class ItemController implements ItemService{
             throw new RuntimeException(e);
         }
         return itemObList;
+    }
+
+    @Override
+    public List<String> itemIdslist() {
+        ArrayList<String> itemIdsList = new ArrayList<>();
+        ObservableList<Item> allItem = getAllItem();
+        allItem.forEach(id->{
+            itemIdsList.add(id.getItemCode());
+        });
+        return itemIdsList;
     }
 }

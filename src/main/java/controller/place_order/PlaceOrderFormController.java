@@ -3,6 +3,9 @@ package controller.place_order;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import controller.customer.CustomerController;
+import controller.item.ItemController;
+import dto.Customer;
+import dto.Item;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -44,7 +47,7 @@ public class PlaceOrderFormController implements Initializable {
     private JFXComboBox<String> comboxCustId;
 
     @FXML
-    private JFXComboBox<?> comboxItemcode;
+    private JFXComboBox<String> comboxItemcode;
 
     @FXML
     private Label lbOrderId;
@@ -81,6 +84,45 @@ public class PlaceOrderFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     loadDateAndTime();
     loadCustomerIds();
+    loadItemIds();
+
+    comboxCustId.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+        if (t1!=null){
+            searchCustDetails(t1);
+        }
+    });
+
+    comboxItemcode.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+        if(t1!=null) {
+        searchItemDetails(t1);
+        }
+
+    });
+    }
+
+    private void searchItemDetails(String t1) {
+        Item item = ItemController.getInstance().searchItem(t1);
+        txtDescription.setText(item.getDescription());
+        txtStock.setText(String.valueOf(item.getQty()));
+
+
+    }
+
+    private void searchCustDetails(String t1) {
+        Customer customer = CustomerController.getInstance().searchCustomer(t1);
+        txtCustName.setText(customer.getName());
+        txtCustAddress.setText(customer.getAddress());
+
+    }
+
+    private void loadItemIds() {
+        List<String> itemIdsList= ItemController.getInstance().itemIdslist();
+        ObservableList<String> ItemIds =FXCollections.observableArrayList();
+        itemIdsList.forEach(ids->{
+            ItemIds.add(ids);
+        });
+
+        comboxItemcode.setItems(ItemIds);
     }
 
     private void loadCustomerIds() {
