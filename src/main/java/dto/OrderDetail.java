@@ -5,18 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 
-public class Orders {
-
+public class OrderDetail {
     private String orderID;
-    private LocalDate orderDate;
-    private String custID;
-    private List<OrderDetail> orderDetails;
+    private String itemCode;
+    private Integer qty;
+    private Double discount;
+
 }

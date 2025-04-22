@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -30,8 +31,14 @@
         </columns>
       </TableView>
       <JFXButton layoutX="481.0" layoutY="563.0" onAction="#btnOnActionPlaceOrder" prefHeight="26.0" prefWidth="78.0" text="Place Order" textFill="#c14040" />
-      <Label layoutX="58.0" layoutY="563.0" prefHeight="26.0" prefWidth="78.0" text="NET TOTAL :" />
-      <Label fx:id="lblNetTotal" layoutX="136.0" layoutY="563.0" prefHeight="26.0" prefWidth="78.0" text="0000" />
+      <Label layoutX="58.0" layoutY="563.0" prefHeight="26.0" prefWidth="86.0" text="NET TOTAL :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="lblNetTotal" layoutX="143.0" layoutY="563.0" prefHeight="26.0" prefWidth="78.0" text="00.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <Label layoutX="412.0" layoutY="75.0" prefHeight="26.0" prefWidth="78.0" text="Order Time :">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -57,16 +64,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="lbOrderId" layoutX="104.0" layoutY="75.0" prefHeight="26.0" prefWidth="78.0" text="O0001">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
       <Label layoutX="187.0" layoutY="14.0" text="Place Order Form">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <JFXTextField fx:id="txtQty" layoutX="493.0" layoutY="196.0" prefHeight="26.0" prefWidth="53.0" promptText="Qty" />
+      <Label layoutX="168.0" layoutY="255.0" text="Unit Price:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUniPrice" layoutX="242.0" layoutY="255.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtOrderID" layoutX="117.0" layoutY="75.0" prefHeight="26.0" prefWidth="69.0" promptText="order id" />
    </children>
 </AnchorPane>
