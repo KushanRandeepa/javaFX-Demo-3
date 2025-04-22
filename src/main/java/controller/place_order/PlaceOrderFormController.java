@@ -190,7 +190,7 @@ public class PlaceOrderFormController implements Initializable {
         );
         Orders orders = new Orders(orderID, date, custID, orderDetails);
         System.out.println(orders);
-        System.out.println(orders);
+
 
     }
 
