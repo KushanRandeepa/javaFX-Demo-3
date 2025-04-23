@@ -1,5 +1,6 @@
 package controller.place_order;
 
+import DB.DbConnection;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import controller.customer.CustomerController;
@@ -19,6 +20,7 @@ import javafx.util.Duration;
 
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -205,4 +207,8 @@ public class PlaceOrderFormController implements Initializable {
     }
 
 
+    public void btnCommitOnAction(ActionEvent actionEvent) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        connection.commit();
+    }
 }
