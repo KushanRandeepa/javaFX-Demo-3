@@ -3,6 +3,7 @@ package controller.item;
 import DB.DbConnection;
 import dto.Customer;
 import dto.Item;
+import dto.OrderDetail;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import util.CrudUtil;
@@ -129,5 +130,24 @@ public class ItemController implements ItemService{
             itemIdsList.add(id.getItemCode());
         });
         return itemIdsList;
+    }
+
+    @Override
+    public boolean updatestock(List<OrderDetail> orderDetails) {
+        for(OrderDetail orderDetail:orderDetails){
+            boolean isUpdateStock = updatestock(orderDetail);
+            if (!isUpdateStock){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean updatestock(OrderDetail orderDetail){
+        String SQL="UPDATE item SET QtyOnHand=QtyOnHand-? WHERE Itemcode=?";
+        try {
+            return CrudUtil.execute(SQL,orderDetail.getQty(),orderDetail.getItemCode());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -19,6 +19,7 @@ import javafx.util.Duration;
 
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -190,7 +191,16 @@ public class PlaceOrderFormController implements Initializable {
         );
         Orders orders = new Orders(orderID, date, custID, orderDetails);
         System.out.println(orders);
-
+        try {
+            boolean isPlaceOrder = new OrderController().placeOrder(orders);
+            if(isPlaceOrder){
+                new Alert(Alert.AlertType.CONFIRMATION,"Order is Placed Successfully!").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR).show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

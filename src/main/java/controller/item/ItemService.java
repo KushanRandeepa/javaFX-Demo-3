@@ -2,6 +2,7 @@ package controller.item;
 
 import dto.Customer;
 import dto.Item;
+import dto.OrderDetail;
 import javafx.collections.ObservableList;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface ItemService {
     boolean deleteItem(String id);
     ObservableList<Item> getAllItem();
     List<String> itemIdslist();
+
+    boolean updatestock(List<OrderDetail> orderDetails);
 
 }

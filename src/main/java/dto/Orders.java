@@ -17,6 +17,6 @@ public class Orders {
 
     private String orderID;
     private LocalDate orderDate;
-    private String custID;
+    private String customerID;
     private List<OrderDetail> orderDetails;
 }
